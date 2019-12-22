@@ -130,7 +130,8 @@ def fill_noise(x, noise_type):
         assert False
 
 def get_noise(input_depth, method, spatial_size, noise_type='u', var=1./10):
-	"""Devuelve un pytorch. Tensor de tamaño (1 x `input_depth` x `spatial_size [0]` x `spatial_size [1]`)
+	"""
+	Devuelve un pytorch. Tensor de tamaño (1 x `input_depth` x `spatial_size [0]` x `spatial_size [1]`)
      inicializado de una manera específica.
      Args:
          input_depth: número de canales en el tensor
