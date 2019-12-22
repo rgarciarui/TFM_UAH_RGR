@@ -106,17 +106,17 @@ def get_image(path, imsize=-1):
 	img = load(path)
 	
     if isinstance(imsize, int):
-        imsize = (imsize, imsize)
+		imsize = (imsize, imsize)
 
     if imsize[0]!= -1 and img.size != imsize:
-        if imsize[0] > img.size[0]:
-            img = img.resize(imsize, Image.BICUBIC)
-        else:
-            img = img.resize(imsize, Image.ANTIALIAS)
+		if imsize[0] > img.size[0]:
+			img = img.resize(imsize, Image.BICUBIC)
+		else:
+			img = img.resize(imsize, Image.ANTIALIAS)
 
-    img_np = pil_to_np(img)
-
-    return img, img_np
+	img_np = pil_to_np(img)
+	
+	return img, img_np
 
 
 
