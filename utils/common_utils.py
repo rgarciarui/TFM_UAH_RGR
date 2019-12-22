@@ -53,7 +53,7 @@ def get_params(opt_over, net, net_input, downsampler=None):
     return params
 
 def get_image_grid(images_np, nrow=8):
-    '''Crea una cuadrícula a partir de una lista de imágenes concatenándolas'''.
+    '''Crea una cuadrícula a partir de una lista de imágenes concatenándolas'''
     images_torch = [torch.from_numpy(x) for x in images_np]
     torch_grid = torchvision.utils.make_grid(images_torch, nrow)
     
