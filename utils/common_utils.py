@@ -63,31 +63,32 @@ def plot_image_grid(images_np, nrow =8, factor=1, interpolation='lanczos'):
 
 	"""
 	Dibuja imágenes en una cuadrícula
-    
-     Args:
-         images_np: lista de imágenes, cada imagen es np.array de tamaño 3xHxW de 1xHxW
-         nrow: cuántas imágenes habrá en una fila
-         factor: tamaño si la figura plt.
-         interpolation: interpolación utilizada en plt.imshow
+	
+	Args:
+		images_np: lista de imágenes, cada imagen es np.array de tamaño 3xHxW de 1xHxW
+		nrow: cuántas imágenes habrá en una fila
+		factor: tamaño si la figura plt.
+		interpolation: interpolación utilizada en plt.imshow
     """
 
 	n_channels = max(x.shape[0] for x in images_np)
-    assert (n_channels == 3) or (n_channels == 1), "las imágenes deben tener 1 o 3 canales"
-    
-    images_np = [x if (x.shape[0] == n_channels) else np.concatenate([x, x, x], axis=0) for x in images_np]
-
-    grid = get_image_grid(images_np, nrow)
-    
-    plt.figure(figsize=(len(images_np) + factor, 12 + factor))
-    
-    if images_np[0].shape[0] == 1:
+	
+	assert (n_channels == 3) or (n_channels == 1), "las imágenes deben tener 1 o 3 canales"
+	
+	images_np = [x if (x.shape[0] == n_channels) else np.concatenate([x, x, x], axis=0) for x in images_np]
+	
+	grid = get_image_grid(images_np, nrow)
+	
+	plt.figure(figsize=(len(images_np) + factor, 12 + factor))
+	
+	if images_np[0].shape[0] == 1:
         plt.imshow(grid[0], cmap='gray', interpolation=interpolation)
-    else:
+	else:
         plt.imshow(grid.transpose(1, 2, 0), interpolation=interpolation)
-    
-    plt.show()
-    
-    return grid
+	
+	plt.show()
+	
+	return grid
 
 def load(path):
     """Leer imagen PIL."""
