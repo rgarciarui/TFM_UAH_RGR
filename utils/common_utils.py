@@ -106,7 +106,7 @@ def get_image(path, imsize=-1):
 	img = load(path)
 	
     if isinstance(imsize, int):
-		imsize = (imsize, imsize)
+        imsize = (imsize, imsize)
 
     if imsize[0]!= -1 and img.size != imsize:
 		if imsize[0] > img.size[0]:
@@ -121,7 +121,7 @@ def get_image(path, imsize=-1):
 
 
 def fill_noise(x, noise_type):
-    """Rellena el tensor` x` con ruido del tipo `noise_type`."""
+    """Rellena el tensor `x` con ruido del tipo `noise_type`."""
     if noise_type == 'u':
         x.uniform_()
     elif noise_type == 'n':
