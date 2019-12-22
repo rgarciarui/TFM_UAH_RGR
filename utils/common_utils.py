@@ -60,7 +60,9 @@ def get_image_grid(images_np, nrow=8):
     return torch_grid.numpy()
 
 def plot_image_grid(images_np, nrow =8, factor=1, interpolation='lanczos'):
-	"""Dibuja imágenes en una cuadrícula
+
+	"""
+	Dibuja imágenes en una cuadrícula
     
      Args:
          images_np: lista de imágenes, cada imagen es np.array de tamaño 3xHxW de 1xHxW
@@ -68,8 +70,9 @@ def plot_image_grid(images_np, nrow =8, factor=1, interpolation='lanczos'):
          factor: tamaño si la figura plt.
          interpolation: interpolación utilizada en plt.imshow
     """
-    n_channels = max(x.shape[0] for x in images_np)
-    assert (n_channels == 3) or (n_channels == 1), "images should have 1 or 3 channels"
+
+	n_channels = max(x.shape[0] for x in images_np)
+    assert (n_channels == 3) or (n_channels == 1), "las imágenes deben tener 1 o 3 canales"
     
     images_np = [x if (x.shape[0] == n_channels) else np.concatenate([x, x, x], axis=0) for x in images_np]
 
@@ -92,12 +95,14 @@ def load(path):
     return img
 
 def get_image(path, imsize=-1):
-	"""Carguar una imagen y cambiar su tamaño a un tamaño específico. 
+	"""
+	Carguar una imagen y cambiar su tamaño a un tamaño específico. 
 	
 	Args: 
 	path: ruta a la imagen 
 	imresize: tupla o escalar con dimensiones; -1 para `no cambiar tamaño` 
 	"""
+	
     img = load(path)
 
     if isinstance(imsize, int):
