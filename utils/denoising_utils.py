@@ -4,7 +4,7 @@ from .common_utils import *
 
         
 def get_noisy_image(img_np, sigma):
-	"""Agrega ruido gaussiano a una imagen.
+    """Agrega ruido gaussiano a una imagen.
     
      Args:
          img_np: image, np.array con valores de 0 a 1

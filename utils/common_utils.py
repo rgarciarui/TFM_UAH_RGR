@@ -60,34 +60,33 @@ def get_image_grid(images_np, nrow=8):
     return torch_grid.numpy()
 
 def plot_image_grid(images_np, nrow =8, factor=1, interpolation='lanczos'):
-
-	"""
-	Dibuja imágenes en una cuadrícula
-	
-	Args:
-		images_np: lista de imágenes, cada imagen es np.array de tamaño 3xHxW de 1xHxW
-		nrow: cuántas imágenes habrá en una fila
-		factor: tamaño si la figura plt.
-		interpolation: interpolación utilizada en plt.imshow
+    """
+    Dibuja imágenes en una cuadrícula
+    
+    Args:
+        images_np: lista de imágenes, cada imagen es np.array de tamaño 3xHxW de 1xHxW
+        nrow: cuántas imágenes habrá en una fila
+        factor: tamaño si la figura plt.
+        interpolation: interpolación utilizada en plt.imshow
     """
 
-	n_channels = max(x.shape[0] for x in images_np)
-	
-	assert (n_channels == 3) or (n_channels == 1), "las imágenes deben tener 1 o 3 canales"
-	
-	images_np = [x if (x.shape[0] == n_channels) else np.concatenate([x, x, x], axis=0) for x in images_np]
-	
-	grid = get_image_grid(images_np, nrow)
-	
-	plt.figure(figsize=(len(images_np) + factor, 12 + factor))
-	
-	if images_np[0].shape[0] == 1:
-		plt.imshow(grid[0], cmap='gray', interpolation=interpolation)
-	else:
-		plt.imshow(grid.transpose(1, 2, 0), interpolation=interpolation)
-	
-	plt.show()
-	return grid
+    n_channels = max(x.shape[0] for x in images_np)
+    
+    assert (n_channels == 3) or (n_channels == 1), "las imágenes deben tener 1 o 3 canales"
+    
+    images_np = [x if (x.shape[0] == n_channels) else np.concatenate([x, x, x], axis=0) for x in images_np]
+    
+    grid = get_image_grid(images_np, nrow)
+    
+    plt.figure(figsize=(len(images_np) + factor, 12 + factor))
+    
+    if images_np[0].shape[0] == 1:
+        plt.imshow(grid[0], cmap='gray', interpolation=interpolation)
+    else:
+        plt.imshow(grid.transpose(1, 2, 0), interpolation=interpolation)
+    
+    plt.show()
+    return grid
 
 def load(path):
     """Leer imagen PIL."""
@@ -95,28 +94,27 @@ def load(path):
     return img
 
 def get_image(path, imsize=-1):
-	"""
-	Carguar una imagen y cambiar su tamaño a un tamaño específico. 
-	
-	Args: 
-	path: ruta a la imagen 
-	imresize: tupla o escalar con dimensiones; -1 para `no cambiar tamaño` 
-	"""
-	
-	img = load(path)
-	
+    """
+    Carguar una imagen y cambiar su tamaño a un tamaño específico. 
+    
+    Args: 
+    path: ruta a la imagen 
+    imresize: tupla o escalar con dimensiones; -1 para `no cambiar tamaño` 
+    """
+    img = load(path)
+    
     if isinstance(imsize, int):
         imsize = (imsize, imsize)
 
     if imsize[0]!= -1 and img.size != imsize:
-		if imsize[0] > img.size[0]:
-			img = img.resize(imsize, Image.BICUBIC)
-		else:
-			img = img.resize(imsize, Image.ANTIALIAS)
+        if imsize[0] > img.size[0]:
+            img = img.resize(imsize, Image.BICUBIC)
+        else:
+            img = img.resize(imsize, Image.ANTIALIAS)
 
-	img_np = pil_to_np(img)
-	
-	return img, img_np
+    img_np = pil_to_np(img)
+    
+    return img, img_np
 
 
 
@@ -130,8 +128,8 @@ def fill_noise(x, noise_type):
         assert False
 
 def get_noise(input_depth, method, spatial_size, noise_type='u', var=1./10):
-	"""
-	Devuelve un pytorch. Tensor de tamaño (1 x `input_depth` x `spatial_size [0]` x `spatial_size [1]`)
+    """
+    Devuelve un pytorch. Tensor de tamaño (1 x `input_depth` x `spatial_size [0]` x `spatial_size [1]`)
      inicializado de una manera específica.
      Args:
          input_depth: número de canales en el tensor
@@ -202,7 +200,7 @@ def torch_to_np(img_var):
 
 
 def optimize(optimizer_type, parameters, closure, LR, num_iter):
-	"""Ejecuta el bucle de optimización.
+    """Ejecuta el bucle de optimización.
 
      Args:
          optimizer_type: 'LBFGS' de 'adam'

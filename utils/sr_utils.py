@@ -16,7 +16,7 @@ def put_in_center(img_np, target_size):
 
 
 def load_LR_HR_imgs_sr(fname, imsize, factor, enforse_div32=None):
-	'''Carga una imagen, la redimensiona, centra los cultivos y reduce las escalas.
+    '''Carga una imagen, la redimensiona, centra los cultivos y reduce las escalas.
 
      Args:
          fname: ruta a la imagen
