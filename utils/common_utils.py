@@ -67,7 +67,7 @@ def plot_image_grid(images_np, nrow =8, factor=1, interpolation='lanczos'):
          nrow: cuántas imágenes habrá en una fila
          factor: tamaño si la figura plt.
          interpolation: interpolación utilizada en plt.imshow
-     """
+    """
     n_channels = max(x.shape[0] for x in images_np)
     assert (n_channels == 3) or (n_channels == 1), "images should have 1 or 3 channels"
     
@@ -133,7 +133,7 @@ def get_noise(input_depth, method, spatial_size, noise_type='u', var=1./10):
          spatial_size: tamaño espacial del tensor para inicializar
          noise_type: 'u' para uniforme; 'n' para normal
          var: un factor, un ruido se multiplicará. Básicamente es un escalador de desviación estándar.
-     """
+    """
     if isinstance(spatial_size, int):
         spatial_size = (spatial_size, spatial_size)
     if method == 'noise':
