@@ -103,8 +103,8 @@ def get_image(path, imsize=-1):
 	imresize: tupla o escalar con dimensiones; -1 para `no cambiar tamaño` 
 	"""
 	
-    img = load(path)
-
+	img = load(path)
+	
     if isinstance(imsize, int):
         imsize = (imsize, imsize)
 
