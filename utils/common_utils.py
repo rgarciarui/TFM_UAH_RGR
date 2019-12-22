@@ -82,12 +82,11 @@ def plot_image_grid(images_np, nrow =8, factor=1, interpolation='lanczos'):
 	plt.figure(figsize=(len(images_np) + factor, 12 + factor))
 	
 	if images_np[0].shape[0] == 1:
-        plt.imshow(grid[0], cmap='gray', interpolation=interpolation)
+		plt.imshow(grid[0], cmap='gray', interpolation=interpolation)
 	else:
-        plt.imshow(grid.transpose(1, 2, 0), interpolation=interpolation)
+		plt.imshow(grid.transpose(1, 2, 0), interpolation=interpolation)
 	
 	plt.show()
-	
 	return grid
 
 def load(path):
