@@ -209,9 +209,9 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
          LR: tasa de aprendizaje
          num_iter: número de iteraciones
     """
-    total_loss_acum = []
+	total_loss_acum = []
 	total_loss_item_acum = []
-    psrn_acum = []
+	psrn_acum = []
 	
     if optimizer_type == 'LBFGS':
         # Do several steps with adam first
