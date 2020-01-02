@@ -209,8 +209,9 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
          LR: tasa de aprendizaje
          num_iter: número de iteraciones
     """
-                total_loss_item_acum = [] 
-                psrn_acum = []
+    total_loss_item_acum = [] 
+    psrn_acum = []
+	
     if optimizer_type == 'LBFGS':
         # Do several steps with adam first
         optimizer = torch.optim.Adam(parameters, lr=0.001)
@@ -218,7 +219,7 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
             optimizer.zero_grad()
             total_loss, total_loss_item, psrn = closure()
             total_loss_item_acum.append(total_loss_item)
-                                               psrn_acum.append(psrn)
+            psrn_acum.append(psrn)
             optimizer.step()
 
         print('Iniciando la optimización con LBFGS')        
@@ -236,7 +237,7 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
             optimizer.zero_grad()
             total_loss, total_loss_item, psrn = closure()
             total_loss_item_acum.append(total_loss_item)
-                                               psrn_acum.append(psrn)
+            psrn_acum.append(psrn)
             optimizer.step()
     else:
         assert False
