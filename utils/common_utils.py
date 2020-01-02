@@ -242,7 +242,7 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
     else:
         assert False
                 
-    print(np.array(total_loss_item_acum)))
+    print(np.array(total_loss_item_acum))
 
     print(np.array(psrn_acum))
                 
