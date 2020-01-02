@@ -202,19 +202,23 @@ def torch_to_np(img_var):
 def optimize(optimizer_type, parameters, closure, LR, num_iter):
     """Ejecuta el bucle de optimización.
 
-     Args:
-         optimizer_type: 'LBFGS' de 'adam'
-         parameters: lista de tensores para optimizar sobre
-         closure: función, que devuelve variable de pérdida
-         LR: tasa de aprendizaje
-         num_iter: número de iteraciones
-    """
+     Args:
+         optimizer_type: 'LBFGS' de 'adam'
+         parameters: lista de tensores para optimizar sobre
+         closure: función, que devuelve variable de pérdida
+         LR: tasa de aprendizaje
+         num_iter: número de iteraciones
+    """
+                total_loss_item_acum = [] 
+                psrn_acum = []
     if optimizer_type == 'LBFGS':
         # Do several steps with adam first
         optimizer = torch.optim.Adam(parameters, lr=0.001)
         for j in range(100):
             optimizer.zero_grad()
-            closure()
+            total_loss, total_loss_item, psrn = closure()
+            total_loss_item_acum.append(total_loss_item)
+                                               psrn_acum.append(psrn)
             optimizer.step()
 
         print('Iniciando la optimización con LBFGS')        
@@ -225,12 +229,20 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
         optimizer.step(closure2)
 
     elif optimizer_type == 'adam':
-        print('Iniciando la optimización con ADAM')
+        print('Iniciando la optimización con ADAM Ricardo')
         optimizer = torch.optim.Adam(parameters, lr=LR)
         
         for j in range(num_iter):
             optimizer.zero_grad()
-            closure()
+            total_loss, total_loss_item, psrn = closure()
+            total_loss_item_acum.append(total_loss_item)
+                                               psrn_acum.append(psrn)
             optimizer.step()
     else:
         assert False
+                
+    print(np.array(total_loss_item_acum)))
+
+    print(np.array(psrn_acum))
+                
+    return [total_loss_item_acum, psrn_acum]
