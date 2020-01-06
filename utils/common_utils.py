@@ -279,3 +279,4 @@ def torch_summarize(model, show_weights=True, show_parameters=True):
 
     tmpstr = tmpstr + ')'
     return tmpstr
+
