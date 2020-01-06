@@ -280,7 +280,7 @@ def torch_summarize(model, show_weights=True, show_parameters=True):
     tmpstr = tmpstr + ')'
     return tmpstr
 
-def closure():
+def closure(reg_noise_std, net, net_input, image_np, image_var, mask_var, image_masked, image_mask_np, mse):
 
     global i, psrn_masked_last, last_net, net_input
     
