@@ -1,6 +1,7 @@
 import torch
 import torch.nn as nn
 import torchvision
+from torch.nn.modules.module import _addindent
 import sys
 
 import numpy as np
@@ -250,3 +251,31 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
     #print(np.array(psrn_acum))
                 
     return total_loss_item_acum, psrn_acum, total_loss_acum
+
+
+def torch_summarize(model, show_weights=True, show_parameters=True):
+    """Resume el modelo torch mostrando parámetros y pesos entrenables."""
+    tmpstr = model.__class__.__name__ + ' (\n'
+    for key, module in model._modules.items():
+        # Si contiene capas, llamemos recursivamente para obtener parámetros y pesos
+        if type(module) in [
+            torch.nn.modules.container.Container,
+            torch.nn.modules.container.Sequential
+        ]:
+            modstr = torch_summarize(module)
+        else:
+            modstr = module.__repr__()
+        modstr = _addindent(modstr, 2)
+
+        params = sum([np.prod(p.size()) for p in module.parameters()])
+        weights = tuple([tuple(p.size()) for p in module.parameters()])
+
+        tmpstr += '  (' + key + '): ' + modstr 
+        if show_weights:
+            tmpstr += ', pesos={}'.format(weights)
+        if show_parameters:
+            tmpstr +=  ', parametros={}'.format(params)
+        tmpstr += '\n'   
+
+    tmpstr = tmpstr + ')'
+    return tmpstr
