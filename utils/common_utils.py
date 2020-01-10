@@ -214,16 +214,18 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
     total_loss_acum = []
     total_loss_item_acum = []
     psrn_acum = []
+    psrn_masked_acum = []
     
     if optimizer_type == 'LBFGS':
         # Do several steps with adam first
         optimizer = torch.optim.Adam(parameters, lr=0.001)
         for j in range(100):
             optimizer.zero_grad()
-            total_loss, total_loss_item, psrn = closure()
+            total_loss, total_loss_item, psrn, psrn_masked = closure()
             total_loss_item_acum.append(total_loss_item)
             psrn_acum.append(psrn)
             total_loss_acum.append(total_loss)
+            psrn_masked_acum.append(psrn_masked)
             optimizer.step()
 
         print('Iniciando la optimización con LBFGS')        
@@ -239,10 +241,11 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
         
         for j in range(num_iter):
             optimizer.zero_grad()
-            total_loss, total_loss_item, psrn = closure()
+            total_loss, total_loss_item, psrn, psrn_masked = closure()
             total_loss_item_acum.append(total_loss_item)
             psrn_acum.append(psrn)
             total_loss_acum.append(total_loss)
+            psrn_masked_acum.append(psrn_masked)
             optimizer.step()
     else:
         assert False
@@ -250,7 +253,7 @@ def optimize(optimizer_type, parameters, closure, LR, num_iter):
     #print(np.array(total_loss_item_acum))
     #print(np.array(psrn_acum))
                 
-    return total_loss_item_acum, psrn_acum, total_loss_acum
+    return total_loss_acum, total_loss_item_acum, psrn_acum, psrn_masked_acum
 
 
 def torch_summarize(model, show_weights=True, show_parameters=True):
