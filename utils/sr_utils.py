@@ -16,20 +16,20 @@ def put_in_center(img_np, target_size):
 
 
 def load_LR_HR_imgs_sr(fname, imsize, factor, enforse_div32=None):
-    '''Carga una imagen, la redimensiona, centra los cultivos y reduce las escalas.
+    '''Carga una imagen, la redimensiona, centra los recortes y reduce las escalas.
 
      Args:
          fname: ruta a la imagen
          imsize: nuevo tamaño para la imagen, -1 para no cambiar el tamaño
          factor: factor de reducción de escala
-         enforse_div32: si el centro 'CULTIVO' recorta una imagen, de modo que sus dimensiones sean divisibles por 32.
+         enforse_div32: si 'CROP' centra y recorta una imagen, de modo que sus dimensiones sean divisibles por 32.
      '''
     img_orig_pil, img_orig_np = get_image(fname, -1)
 
     if imsize != -1:
         img_orig_pil, img_orig_np = get_image(fname, imsize)
         
-    # For comparison with GT
+    # Para comparaciones con GT
     if enforse_div32 == 'CROP':
         new_size = (img_orig_pil.size[0] - img_orig_pil.size[0] % 32, 
                     img_orig_pil.size[1] - img_orig_pil.size[1] % 32)
@@ -54,7 +54,7 @@ def load_LR_HR_imgs_sr(fname, imsize, factor, enforse_div32=None):
     img_LR_pil = img_HR_pil.resize(LR_size, Image.ANTIALIAS)
     img_LR_np = pil_to_np(img_LR_pil)
 
-    print('HR and LR resolutions: %s, %s' % (str(img_HR_pil.size), str (img_LR_pil.size)))
+    print('Resoludiones HR y LR: %s, %s' % (str(img_HR_pil.size), str (img_LR_pil.size)))
 
     return {
                 'orig_pil': img_orig_pil,
