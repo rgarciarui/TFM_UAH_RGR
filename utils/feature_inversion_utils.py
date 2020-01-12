@@ -18,7 +18,7 @@ def get_vanilla_vgg_features(cut_idx=-1):
         os.system(
             'wget --no-check-certificate -N https://s3-us-west-2.amazonaws.com/jcjohns-models/vgg19-d01eb7cb.pth')
         vgg_weights = torch.load('vgg19-d01eb7cb.pth')
-        # fix compatibility issues
+        # solucionar problemas de compatibilidad
         map = {'classifier.6.weight':u'classifier.7.weight', 'classifier.6.bias':u'classifier.7.bias'}
         vgg_weights = OrderedDict([(map[k] if k in map else k,v) for k,v in vgg_weights.iteritems()])
 
