@@ -49,7 +49,7 @@ def get_texture_nets(inp=3, ratios = [32, 16, 8, 4, 2, 1], fill_noise=False, pad
 
             cur = nn.Sequential()
 
-            # Batch norm before merging 
+            # Batch de noramlización antes de fusionar 
             seq.add(normalization(conv_num))
             cur_temp.add(normalization(conv_num * (j - 1)))
 

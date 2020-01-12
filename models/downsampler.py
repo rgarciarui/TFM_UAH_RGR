@@ -128,7 +128,7 @@ def get_kernel(factor, kernel_type, phase, kernel_width, support=None, sigma=Non
             
         
     else:
-        assert False, 'wrong method name'
+        assert False, 'nombre de metodo erroneo'
     
     kernel /= kernel.sum()
     

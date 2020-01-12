@@ -9,7 +9,7 @@ def skip(
         need_sigmoid=True, need_bias=True, 
         pad='zero', upsample_mode='nearest', downsample_mode='stride', act_fun='LeakyReLU', 
         need1x1_up=True):
-    """Ensambla codificador-decodificador con conexiones de omisión.
+    """Ensambla codificador-decodificador con conexiones por omisión.
 
 	Argumentos:
          act_fun: Cadena 'LeakyReLU | Swish | ELU | none' o módulo (por ejemplo, nn.ReLU)

@@ -14,7 +14,7 @@ class ListModule(nn.Module):
 
     def __getitem__(self, idx):
         if idx >= len(self._modules):
-            raise IndexError('index {} is out of range'.format(idx))
+            raise IndexError('Indice {} está fuera de rango'.format(idx))
         if idx < 0: 
             idx = len(self) + idx
 
